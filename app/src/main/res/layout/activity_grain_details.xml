@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".GrainDetails">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        app:cardCornerRadius="8dp"
+        android:layout_margin="5dp"
+        android:elevation="10dp">
+
+        <ImageView
+            android:id="@+id/grain_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:scaleType="centerCrop"
+            />
+    </androidx.cardview.widget.CardView>
+    <TextView
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="25dp"
+        android:text="hello"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/grain_name"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center|bottom">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_margin="25dp"
+            android:background="@drawable/search_bar"
+            android:text="Add To Basket"
+            android:textSize="20dp" />
+    </LinearLayout>
+
+</LinearLayout>
