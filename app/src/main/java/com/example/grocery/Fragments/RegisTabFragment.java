@@ -13,11 +13,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.grocery.Model.UserModel;
 import com.example.grocery.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class RegisTabFragment extends Fragment {
@@ -29,12 +31,13 @@ public class RegisTabFragment extends Fragment {
     EditText name,email,password;
     Button register;
     FirebaseAuth auth;
+    FirebaseDatabase database;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.registab_fragment,container,false);
        BindingViews(root);
         auth = FirebaseAuth.getInstance();
-        
+        database = FirebaseDatabase.getInstance();
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,7 +90,14 @@ public class RegisTabFragment extends Fragment {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful())
                         {
+                            UserModel user = new UserModel(user_name,user_email,user_pass);
+                            String id = task.getResult().getUser().getUid();
+                            database.getReference().child("Users").child(id).setValue(user);
                             Toast.makeText(getActivity(), "Registration Complete", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            Toast.makeText(getActivity(), "Registration Unsuccessful"+task.getException(), Toast.LENGTH_SHORT).show();
 
                         }
                     }
