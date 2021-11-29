@@ -58,6 +58,7 @@
         app:layout_constraintWidth_percent=".8" />
 
     <Button
+        android:id="@+id/regbtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintVertical_bias=".8"

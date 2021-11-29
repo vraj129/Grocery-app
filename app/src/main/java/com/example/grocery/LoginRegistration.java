@@ -13,7 +13,6 @@ public class LoginRegistration extends AppCompatActivity {
     TabLayout tabLayout;
     ViewPager viewPager;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
