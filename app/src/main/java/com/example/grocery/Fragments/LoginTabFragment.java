@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -25,15 +26,18 @@ public class LoginTabFragment extends Fragment {
     EditText email,password;
     Button logbtn;
     FirebaseAuth auth;
+    ProgressBar progressBar;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.logintab_fragment,container,false);
         BindView(root);
+        progressBar.setVisibility(View.GONE);
         auth = FirebaseAuth.getInstance();
         logbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 loginUser();
+                progressBar.setVisibility(View.VISIBLE);
             }
         });
         return root;
@@ -73,9 +77,13 @@ public class LoginTabFragment extends Fragment {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful())
                         {
+                            progressBar.setVisibility(View.GONE);
+                            email.setText("");
+                            password.setText("");
                             Toast.makeText(getActivity(), "Login Successful", Toast.LENGTH_SHORT).show();
                             Intent i = new Intent(getActivity(), MainActivity.class);
                             startActivity(i);
+                            getActivity().finish();
                         }
                         else
                         {
@@ -91,5 +99,6 @@ public class LoginTabFragment extends Fragment {
         email = root.findViewById(R.id.user_mail);
         password = root.findViewById(R.id.user_pass);
         logbtn = root.findViewById(R.id.login);
+        progressBar = root.findViewById(R.id.progressbar);
     }
 }

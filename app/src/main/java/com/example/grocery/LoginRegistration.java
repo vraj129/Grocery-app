@@ -5,13 +5,16 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.example.grocery.Adapter.LoginAdapter;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginRegistration extends AppCompatActivity {
     TabLayout tabLayout;
     ViewPager viewPager;
+    FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +23,7 @@ public class LoginRegistration extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_login_registration);
         getSupportActionBar().hide();
+        auth = FirebaseAuth.getInstance();
         tabLayout = findViewById(R.id.tab_layout);
         viewPager = findViewById(R.id.view_pager);
 
@@ -47,7 +51,5 @@ public class LoginRegistration extends AppCompatActivity {
 
             }
         });
-
-
     }
 }

@@ -48,25 +48,25 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="$4.99"
-                    android:id="@+id/temp"
-                    android:layout_alignParentLeft="true"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
-
-                <Button
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginEnd="2dp"
-                    android:background="@drawable/search_bar"
-                    android:drawableTop="@drawable/ic_baseline_add_24"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:textSize="20sp" />
+                <!--                <Button-->
+<!--                    android:layout_width="50dp"-->
+<!--                    android:layout_height="50dp"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_alignParentRight="true"-->
+<!--                    android:layout_marginEnd="2dp"-->
+<!--                    android:background="@drawable/search_bar"-->
+<!--                    android:drawableTop="@drawable/ic_baseline_add_24"-->
+<!--                    android:textSize="20sp" />-->
             </RelativeLayout>
+
+            <TextView
+                android:id="@+id/temp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="$4.99"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
         </LinearLayout>
 
 

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -32,16 +33,20 @@ public class RegisTabFragment extends Fragment {
     Button register;
     FirebaseAuth auth;
     FirebaseDatabase database;
+    ProgressBar progressBar;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.registab_fragment,container,false);
        BindingViews(root);
+       progressBar.setVisibility(View.GONE);
+
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 createUser();
+                progressBar.setVisibility(View.VISIBLE);
             }
         });
 
@@ -93,6 +98,10 @@ public class RegisTabFragment extends Fragment {
                             UserModel user = new UserModel(user_name,user_email,user_pass);
                             String id = task.getResult().getUser().getUid();
                             database.getReference().child("Users").child(id).setValue(user);
+                            progressBar.setVisibility(View.GONE);
+                            name.setText("");
+                            email.setText("");
+                            password.setText("");
                             Toast.makeText(getActivity(), "Registration Complete", Toast.LENGTH_SHORT).show();
                         }
                         else
@@ -111,5 +120,6 @@ public class RegisTabFragment extends Fragment {
         email =root.findViewById(R.id.user_mail);
         password = root.findViewById(R.id.user_pass);
         register = root.findViewById(R.id.regbtn);
+        progressBar = root.findViewById(R.id.progressbar);
     }
 }
