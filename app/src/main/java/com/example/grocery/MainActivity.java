@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
@@ -17,6 +20,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     RecyclerView exclusive_recycler,groceries_recycler,bestsellerecycler;
     RecyclerView.Adapter exclusive_adapter,groceries_adapter;
+    ImageView cart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +28,14 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
         ImageSlider imageSlider = findViewById(R.id.image_slider);
+        cart = findViewById(R.id.cart);
+        cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this,CartActivity.class);
+                startActivity(i);
+            }
+        });
         List<SlideModel> slideModels= new ArrayList<>();
         SlideModel e1 = new SlideModel(R.drawable.fresh3,ScaleTypes.FIT);
         SlideModel e2 = new SlideModel(R.drawable.fresh2,ScaleTypes.FIT);
@@ -51,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         exclusive_models.add(new exclusive_model(R.drawable.fruit3,"King Mangoes","8pcs, Priceg"));
         exclusive_models.add(new exclusive_model(R.drawable.fruit4,"Juicy Watermelon","3kg, Priceg"));
 
-        exclusive_adapter = new exclusive_adapter(exclusive_models);
+        exclusive_adapter = new exclusive_adapter(exclusive_models,this);
         exclusive_recycler.setAdapter(exclusive_adapter);
     }
     private void groceriesrecycler()
@@ -83,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         exclusive_models.add(new exclusive_model(R.drawable.best3,"Turmeric","8pcs, Priceg"));
         exclusive_models.add(new exclusive_model(R.drawable.best4,"Asafoetida","3kg, Priceg"));
 
-        exclusive_adapter = new exclusive_adapter(exclusive_models);
+        exclusive_adapter = new exclusive_adapter(exclusive_models,this);
         bestsellerecycler.setAdapter(exclusive_adapter);
     }
 }

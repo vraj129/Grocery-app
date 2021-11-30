@@ -5,10 +5,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="20dp"
     android:layout_margin="10dp"
-    android:id="@+id/phone_Cardview"
+    android:id="@+id/phone_Cardview1"
     app:cardElevation="6dp">
 
     <LinearLayout
+        android:id="@+id/fruits_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -64,14 +65,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="$4.99"
+                android:text="₹100"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
         </LinearLayout>
-
-
-
-
     </LinearLayout>
 
 
