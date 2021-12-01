@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="20dp"
+    android:layout_margin="10dp"
+    android:id="@+id/phone_Cardview1"
+    app:cardElevation="6dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_margin="10dp"
+           android:weightSum="2"
+           android:orientation="horizontal">
+           <TextView
+
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="Product Name"
+               android:layout_weight="1"
+               android:textColor="@color/black"
+               android:textSize="16sp" />
+           <TextView
+               android:gravity="right"
+               android:textStyle="bold"
+               android:layout_weight="1"
+               android:id="@+id/productname"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="Product Name"
+               android:textColor="@color/black"
+               android:textSize="16sp" />
+       </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:weightSum="2"
+            android:orientation="horizontal">
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Product Price"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+            <TextView
+                android:gravity="right"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:id="@+id/productprice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Product Price"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:weightSum="2"
+            android:orientation="horizontal">
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Current Date"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+            <TextView
+                android:gravity="right"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:id="@+id/currentdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Current Date"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:weightSum="2"
+            android:orientation="horizontal">
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Current Time"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+            <TextView
+                android:gravity="right"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:id="@+id/currentime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Current Time"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:weightSum="2"
+            android:orientation="horizontal">
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total Quantity"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+            <TextView
+                android:gravity="right"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:id="@+id/totalQuantity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total Quantity"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:weightSum="2"
+            android:orientation="horizontal">
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total Price"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+            <TextView
+                android:gravity="right"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:id="@+id/totalprice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total price"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -6,30 +6,87 @@
     android:layout_height="match_parent"
     tools:context=".CartActivity">
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearlayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/addtocartimg"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.438" />
+        app:layout_constraintTop_toTopOf="@+id/constraint">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Your Cart is Empty"
-        android:textColor="@color/black"
-        android:textSize="22sp"
-        android:textStyle="bold"
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/addtocartimg" />
+
+        <TextView
+            android:id="@+id/cartemty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your Cart is Empty"
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="#51FA07"
+            android:text="Total Price : ₹300"
+            android:textAlignment="center"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:padding="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cartrecycler"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintHeight_percent=".8"
+            android:layout_marginRight="8dp"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintBottom_toTopOf="@+id/buybtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <Button
+            android:id="@+id/buybtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/view_bg"
+            android:text="Buy Now"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintWidth_percent=".8" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
