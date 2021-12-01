@@ -2,10 +2,19 @@ package com.example.grocery;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.grocery.Adapter.CartAdapter;
 import com.example.grocery.Model.CartModel;
@@ -25,10 +34,11 @@ public class CartActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     CartAdapter cartAdapter;
     List<CartModel> cartModelList;
-
+    TextView textView;
     FirebaseAuth auth;
     FirebaseFirestore firestore;
-
+    LinearLayout linearLayout;
+    ConstraintLayout constraintLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +47,12 @@ public class CartActivity extends AppCompatActivity {
         firestore = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
         recyclerView = findViewById(R.id.cartrecycler);
+        textView = findViewById(R.id.textView);
+        linearLayout = findViewById(R.id.linearlayout);
+        constraintLayout = findViewById(R.id.constraint);
+        LocalBroadcastManager.getInstance(CartActivity.this)
+                .registerReceiver(mMBroadcastReceiver,new IntentFilter("TotalAmount"));
+
         recyclerView.setLayoutManager(new LinearLayoutManager(CartActivity.this));
 
         cartModelList = new ArrayList<>();
@@ -55,8 +71,18 @@ public class CartActivity extends AppCompatActivity {
 
                     }
                 }
+
             }
         });
 
     }
+
+    public BroadcastReceiver mMBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+                int totalBill = intent.getIntExtra("totalAmount",0);
+                textView.setText("Total Bill : ₹"+totalBill);
+        }
+    };
+
 }
