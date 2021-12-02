@@ -3,13 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic_baseline_login_24.xml" value="0.2265625" />
         <entry key="app/src/main/res/drawable/round_corners.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/view_bg.xml" value="0.2" />
-        <entry key="app/src/main/res/layout/activity_cart.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_buy_product.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_cart.xml" value="0.19831223628691982" />
         <entry key="app/src/main/res/layout/activity_grain_details.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/activity_login_registration.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/cart_view.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/cart_view.xml" value="0.27011494252873564" />
         <entry key="app/src/main/res/layout/groceries_recycler_view.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/logintab_fragment.xml" value="0.22" />
         <entry key="app/src/main/res/layout/recylerview.xml" value="0.30833333333333335" />

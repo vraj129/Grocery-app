@@ -13,8 +13,11 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.grocery.Adapter.CartAdapter;
 import com.example.grocery.Model.CartModel;
@@ -36,9 +39,13 @@ public class CartActivity extends AppCompatActivity {
     List<CartModel> cartModelList;
     TextView textView;
     FirebaseAuth auth;
+    boolean status = false;
     FirebaseFirestore firestore;
     LinearLayout linearLayout;
     ConstraintLayout constraintLayout;
+    ProgressBar progressBar;
+    int amount=0;
+    Button buyButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,39 +57,62 @@ public class CartActivity extends AppCompatActivity {
         textView = findViewById(R.id.textView);
         linearLayout = findViewById(R.id.linearlayout);
         constraintLayout = findViewById(R.id.constraint);
-        LocalBroadcastManager.getInstance(CartActivity.this)
-                .registerReceiver(mMBroadcastReceiver,new IntentFilter("TotalAmount"));
-
+        progressBar = findViewById(R.id.progressbar);
+        progressBar.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.GONE);
         recyclerView.setLayoutManager(new LinearLayoutManager(CartActivity.this));
 
         cartModelList = new ArrayList<>();
         cartAdapter = new CartAdapter(CartActivity.this,cartModelList);
         recyclerView.setAdapter(cartAdapter);
-        firestore.collection("AddToCart").document(auth.getCurrentUser().getUid())
-                .collection("currentUser").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        firestore.collection("currentUser").document(auth.getCurrentUser().getUid())
+                .collection("AddToCart").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful())
                 {
+                    linearLayout.setVisibility(View.GONE);
+                    constraintLayout.setVisibility(View.VISIBLE);
+
+
                     for(DocumentSnapshot documentSnapshot : task.getResult().getDocuments()){
-                        CartModel cartModel = documentSnapshot.toObject(CartModel.class);
+                        String documentId= documentSnapshot.getId();
+                                CartModel cartModel = documentSnapshot.toObject(CartModel.class);
+                                cartModel.setDocumentId(documentId);
                         cartModelList.add(cartModel);
                         cartAdapter.notifyDataSetChanged();
+                        progressBar.setVisibility(View.GONE);
+                        recyclerView.setVisibility(View.VISIBLE);
 
                     }
-                }
 
+                    calculateTotalAmount(cartModelList);
+                    amount = calculateTotalAmount(cartModelList);
+                    if(amount == 0)
+                    {
+                        status = true;
+                        progressBar.setVisibility(View.GONE);
+                        constraintLayout.setVisibility(View.GONE);
+                        linearLayout.setVisibility(View.VISIBLE);
+                        Toast.makeText(CartActivity.this, "Your Cart Is Empty", Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
 
+
     }
 
-    public BroadcastReceiver mMBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-                int totalBill = intent.getIntExtra("totalAmount",0);
-                textView.setText("Total Bill : ₹"+totalBill);
+    private int calculateTotalAmount(List<CartModel> cartModelList) {
+
+        int totalAmount = 0;
+        for(CartModel model : cartModelList)
+        {
+            totalAmount += Integer.parseInt(model.getTotalPrice());
         }
-    };
+        textView.setText("Total Amount : ₹"+String.valueOf(totalAmount));
+        return totalAmount;
+    }
+
 
 }

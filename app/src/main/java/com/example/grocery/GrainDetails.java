@@ -92,8 +92,8 @@ public class GrainDetails extends AppCompatActivity {
         cartMap.put("totalQuantity",String.valueOf(quantity));
         cartMap.put("totalPrice",String.valueOf(totalprice));
 
-        firestore.collection("AddToCart").document(auth.getCurrentUser().getUid())
-                .collection("currentUser").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+        firestore.collection("currentUser").document(auth.getCurrentUser().getUid())
+                .collection("AddToCart").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
             @Override
             public void onComplete(@NonNull Task<DocumentReference> task) {
                 Toast.makeText(GrainDetails.this,"Added To Cart",Toast.LENGTH_SHORT).show();

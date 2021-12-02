@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +22,9 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     RecyclerView exclusive_recycler,groceries_recycler,bestsellerecycler;
     RecyclerView.Adapter exclusive_adapter,groceries_adapter;
-    ImageView cart;
-
+    ImageView cart,logout;
+    FirebaseAuth auth;
+    FirebaseUser firebaseUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +32,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ImageSlider imageSlider = findViewById(R.id.image_slider);
         cart = findViewById(R.id.cart);
+        logout = findViewById(R.id.logout);
+        auth = FirebaseAuth.getInstance();
+        firebaseUser = auth.getCurrentUser();
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                auth.signOut();
+                Intent i = new Intent(MainActivity.this,LoginRegistration.class);
+                startActivity(i);
+                finish();
+            }
+        });
         cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

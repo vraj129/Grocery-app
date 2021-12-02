@@ -46,7 +46,7 @@ public class RegisTabFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 createUser();
-                progressBar.setVisibility(View.VISIBLE);
+
             }
         });
 
@@ -54,6 +54,7 @@ public class RegisTabFragment extends Fragment {
     }
 
     private void createUser() {
+        progressBar.setVisibility(View.VISIBLE);
         String user_name = name.getText().toString();
         String user_email = email.getText().toString();
         String user_pass = password.getText().toString();
@@ -61,11 +62,13 @@ public class RegisTabFragment extends Fragment {
 
         if(TextUtils.isEmpty(user_name))
         {
+            progressBar.setVisibility(View.GONE);
             Toast.makeText(getActivity(), "Name is Empty", Toast.LENGTH_SHORT).show();
             return;
         }
         if(TextUtils.isEmpty(user_email))
         {
+            progressBar.setVisibility(View.GONE);
             Toast.makeText(getActivity(), "Email is Empty", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -73,17 +76,20 @@ public class RegisTabFragment extends Fragment {
         {
             if(!user_email.trim().matches(emailPattern))
             {
+                progressBar.setVisibility(View.GONE);
                 Toast.makeText(getActivity(), "Email is Invalid", Toast.LENGTH_SHORT).show();
                 return;
             }
         }
         if(TextUtils.isEmpty(user_pass))
         {
+            progressBar.setVisibility(View.GONE);
             Toast.makeText(getActivity(), "Password is Empty", Toast.LENGTH_SHORT).show();
             return;
         }
         if(user_pass.length() < 6)
         {
+            progressBar.setVisibility(View.GONE);
             Toast.makeText(getActivity(), "Password Lenght should be Greater Than 6", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -107,7 +113,7 @@ public class RegisTabFragment extends Fragment {
                         else
                         {
                             Toast.makeText(getActivity(), "Registration Unsuccessful"+task.getException(), Toast.LENGTH_SHORT).show();
-
+                            progressBar.setVisibility(View.GONE);
                         }
                     }
                 });

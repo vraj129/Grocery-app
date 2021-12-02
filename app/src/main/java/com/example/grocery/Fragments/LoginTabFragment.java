@@ -1,6 +1,9 @@
 package com.example.grocery.Fragments;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -28,27 +31,40 @@ public class LoginTabFragment extends Fragment {
     FirebaseAuth auth;
     ProgressBar progressBar;
 
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.logintab_fragment,container,false);
         BindView(root);
         progressBar.setVisibility(View.GONE);
         auth = FirebaseAuth.getInstance();
+        if(auth.getCurrentUser() != null)
+        {
+            progressBar.setVisibility(View.VISIBLE);
+            //Toast.makeText(getActivity(),"Please wait you are Already Logged In",Toast.LENGTH_SHORT).show();
+            progressBar.setVisibility(View.GONE);
+            Intent i = new Intent(getActivity(), MainActivity.class);
+            startActivity(i);
+            getActivity().finish();
+
+        }
         logbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 loginUser();
-                progressBar.setVisibility(View.VISIBLE);
+
             }
         });
         return root;
     }
 
     private void loginUser() {
+        progressBar.setVisibility(View.VISIBLE);
         String user_email = email.getText().toString();
         String user_pass = password.getText().toString();
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
         if(TextUtils.isEmpty(user_email))
         {
+            progressBar.setVisibility(View.GONE);
             Toast.makeText(getActivity(), "Email is Empty", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -56,17 +72,20 @@ public class LoginTabFragment extends Fragment {
         {
             if(!user_email.trim().matches(emailPattern))
             {
+                progressBar.setVisibility(View.GONE);
                 Toast.makeText(getActivity(), "Email is Invalid", Toast.LENGTH_SHORT).show();
                 return;
             }
         }
         if(TextUtils.isEmpty(user_pass))
         {
+            progressBar.setVisibility(View.GONE);
             Toast.makeText(getActivity(), "Password is Empty", Toast.LENGTH_SHORT).show();
             return;
         }
         if(user_pass.length() < 6)
         {
+            progressBar.setVisibility(View.GONE);
             Toast.makeText(getActivity(), "Password Lenght should be Greater Than 6", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -88,7 +107,7 @@ public class LoginTabFragment extends Fragment {
                         else
                         {
                             Toast.makeText(getActivity(), "Login Unsuccessful"+task.getException(), Toast.LENGTH_SHORT).show();
-
+                            progressBar.setVisibility(View.GONE);
                         }
                     }
                 });
@@ -101,4 +120,6 @@ public class LoginTabFragment extends Fragment {
         logbtn = root.findViewById(R.id.login);
         progressBar = root.findViewById(R.id.progressbar);
     }
+
+
 }

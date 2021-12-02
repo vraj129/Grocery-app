@@ -20,11 +20,12 @@
             android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/logout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:src="@drawable/ic_baseline_people_alt_24"
-               />
+                android:src="@drawable/ic_baseline_login_24" />
+
 
             <ImageView
                 android:id="@+id/cart"
