@@ -3,21 +3,24 @@ package com.example.grocery;
 import android.graphics.drawable.GradientDrawable;
 
 public class Groceries_model {
-    int image;
+    String image;
     String grain_title;
-    GradientDrawable color;
 
-    public Groceries_model(int image, String grain_title, GradientDrawable color) {
-        this.image = image;
-        this.grain_title = grain_title;
-        this.color = color;
+
+    public Groceries_model() {
     }
 
-    public int getImage() {
+    public Groceries_model(String image, String grain_title) {
+        this.image = image;
+        this.grain_title = grain_title;
+
+    }
+
+    public String getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
@@ -27,13 +30,5 @@ public class Groceries_model {
 
     public void setGrain_title(String grain_title) {
         this.grain_title = grain_title;
-    }
-
-    public GradientDrawable getColor() {
-        return color;
-    }
-
-    public void setColor(GradientDrawable color) {
-        this.color = color;
     }
 }

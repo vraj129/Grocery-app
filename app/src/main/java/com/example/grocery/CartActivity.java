@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -46,6 +47,7 @@ public class CartActivity extends AppCompatActivity {
     ProgressBar progressBar;
     int amount=0;
     Button buyButton;
+    private static final String TAG = "Cart Activity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +82,8 @@ public class CartActivity extends AppCompatActivity {
                                 CartModel cartModel = documentSnapshot.toObject(CartModel.class);
                                 cartModel.setDocumentId(documentId);
                         cartModelList.add(cartModel);
+                        Log.d(TAG,"Date : "+documentSnapshot.toString());
+                        Log.d(TAG,"Date Count : "+cartModelList.size());
                         cartAdapter.notifyDataSetChanged();
                         progressBar.setVisibility(View.GONE);
                         recyclerView.setVisibility(View.VISIBLE);

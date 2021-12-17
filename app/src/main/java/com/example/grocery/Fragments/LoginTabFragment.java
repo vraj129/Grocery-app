@@ -86,7 +86,7 @@ public class LoginTabFragment extends Fragment {
         if(user_pass.length() < 6)
         {
             progressBar.setVisibility(View.GONE);
-            Toast.makeText(getActivity(), "Password Lenght should be Greater Than 6", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Password Length should be Greater Than 6", Toast.LENGTH_SHORT).show();
             return;
         }
 

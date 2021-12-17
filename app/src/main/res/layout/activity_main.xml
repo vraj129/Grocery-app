@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,171 +7,20 @@
     android:orientation="vertical"
     android:background="#ffffff"
     tools:context=".MainActivity">
-    <LinearLayout
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/framelayout"/>
+    
+    <com.etebarian.meowbottomnavigation.MeowBottomNavigation
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp"
-        android:gravity="center">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/logout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:src="@drawable/ic_baseline_login_24" />
-
-
-            <ImageView
-                android:id="@+id/cart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginEnd="4dp"
-                android:layout_marginRight="4dp"
-                android:src="@drawable/ic_baseline_shopping_cart_24" />
-        </RelativeLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="37dp"
-                android:layout_height="37dp"
-                android:src="@drawable/carrot"
-                android:layout_marginLeft="35dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Grocery App"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
-        </LinearLayout>
-
-<!--        <EditText-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:layout_marginTop="25dp"-->
-<!--            android:background="@drawable/search_bar"-->
-<!--            android:drawableStart="@drawable/ic_baseline_search_24"-->
-<!--            android:hint="Search Store"-->
-<!--            android:backgroundTint="#EAE7E7"-->
-<!--            android:padding="16dp"-->
-<!--            android:paddingStart="16dp"-->
-<!--            android:paddingEnd="16dp"/>-->
-
-        <com.denzcoskun.imageslider.ImageSlider
-            android:id="@+id/image_slider"
-            app:iss_auto_cycle="false"
-            app:iss_period="1000"
-            app:iss_delay="0"
-            android:layout_marginTop="25dp"
-            app:iss_corner_radius="20"
-            android:layout_width="match_parent"
-            android:layout_height="140dp"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:text="Exclusive Offer"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginEnd="4dp"
-                android:layout_marginRight="4dp"
-                android:text="See all"
-                android:textColor="#61E331"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-        </RelativeLayout>
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:id="@+id/exclusiverecycler"/>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Groceries"
-                android:layout_alignParentLeft="true"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="20sp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginEnd="4dp"
-                android:layout_marginRight="4dp"
-                android:text="See all"
-                android:textColor="#61E331"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-        </RelativeLayout>
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:id="@+id/groceriesrecycler"/>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Best Selling"
-                android:layout_alignParentLeft="true"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="20sp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginEnd="4dp"
-                android:layout_marginRight="4dp"
-                android:text="See all"
-                android:textColor="#61E331"
-                android:textSize="15sp"
-                android:textStyle="bold"/>
-        </RelativeLayout>
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:id="@+id/bestsellerecycler"/>
-    </LinearLayout>
-</ScrollView>
+        android:id="@+id/bottomnavigation"
+        app:mbn_circleColor="@color/white"
+        app:mbn_selectedIconColor="#3c415e"
+        app:mbn_countTextColor="@color/white"
+        app:mbn_countBackgroundColor="#ff6f00"
+        app:mbn_defaultIconColor="@color/white"
+        app:mbn_backgroundBottomColor="#3c415e"/>
+</LinearLayout>
