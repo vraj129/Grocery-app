@@ -9,9 +9,11 @@
         <entry key="app/src/main/res/drawable/view_bg.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_buy_product.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_cart.xml" value="0.19831223628691982" />
+        <entry key="app/src/main/res/layout/activity_favourite.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/activity_grain_details.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/activity_login_registration.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/allstore_recycler.xml" value="0.19010416666666666" />
         <entry key="app/src/main/res/layout/cart_view.xml" value="0.27011494252873564" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.340625" />
@@ -21,6 +23,7 @@
         <entry key="app/src/main/res/layout/logintab_fragment.xml" value="0.22" />
         <entry key="app/src/main/res/layout/recylerview.xml" value="0.30833333333333335" />
         <entry key="app/src/main/res/layout/registab_fragment.xml" value="0.25" />
+        <entry key="app/src/main/res/menu/bottom_navigation.xml" value="0.35572916666666665" />
       </map>
     </option>
   </component>

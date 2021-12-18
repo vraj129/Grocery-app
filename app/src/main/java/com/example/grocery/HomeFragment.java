@@ -14,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.denzcoskun.imageslider.ImageSlider;
@@ -40,12 +42,14 @@ public class HomeFragment extends Fragment {
     RecyclerView Exclusive_recycler,groceries_recycler,bestsellerecycler;
     ExclusiveAdapter exclusiveAdapter,getExclusiveAdapter;
     Groceries_adapter groceries_adapter;
-    ImageView cart,logout;
     FirebaseAuth auth;
     FirebaseUser firebaseUser;
     FirebaseFirestore firestore;
+    ScrollView scrollView;
+    LinearLayout linearLayout;
     List<Exclusive_model> ExclusiveList,Discountlist;
     List<Groceries_model> GrocieriesList;
+    int loadStatus = 0;
     private static final String TAG = "HomeFragment";
 
 
@@ -61,28 +65,16 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_home, container, false);
         firestore = FirebaseFirestore.getInstance();
-
+        scrollView = root.findViewById(R.id.scrollview11);
+        scrollView.setVisibility(View.INVISIBLE);
+        linearLayout = root.findViewById(R.id.linear);
         ImageSlider imageSlider = root.findViewById(R.id.image_slider);
-        cart = root.findViewById(R.id.cart);
-        logout = root.findViewById(R.id.logout);
+
+
         auth = FirebaseAuth.getInstance();
         firebaseUser = auth.getCurrentUser();
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                auth.signOut();
-                Intent i = new Intent(getActivity(),LoginRegistration.class);
-                startActivity(i);
-                getActivity().finish();
-            }
-        });
-        cart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getActivity(),CartActivity.class);
-                startActivity(i);
-            }
-        });
+
+
         List<SlideModel> slideModels= new ArrayList<>();
         SlideModel e1 = new SlideModel(R.drawable.pips, ScaleTypes.FIT);
         SlideModel e2 = new SlideModel(R.drawable.saloonbar,ScaleTypes.FIT);
@@ -124,6 +116,7 @@ public class HomeFragment extends Fragment {
                                 ExclusiveList.add(model);
                                 exclusiveAdapter.notifyDataSetChanged();
                             }
+                            loadStatus +=1;
                         } else {
 
                         }
@@ -141,6 +134,7 @@ public class HomeFragment extends Fragment {
                                 GrocieriesList.add(model);
                                 groceries_adapter.notifyDataSetChanged();
                             }
+                            loadStatus +=1;
                         } else {
 
                         }
@@ -158,11 +152,19 @@ public class HomeFragment extends Fragment {
                                 Discountlist.add(model);
                                 getExclusiveAdapter.notifyDataSetChanged();
                             }
+                            loadStatus += 1;
+                            Log.d(TAG,"Load Status 1 : "+loadStatus);
+
+                                linearLayout.setVisibility(View.INVISIBLE);
+                                scrollView.setVisibility(View.VISIBLE);
+                                //Toast.makeText(getActivity(),"All Loaded",Toast.LENGTH_SHORT).show();
+
                         } else {
 
                         }
                     }
                 });
+        Log.d(TAG,"Load Status : "+loadStatus);
 
         return root;
     }

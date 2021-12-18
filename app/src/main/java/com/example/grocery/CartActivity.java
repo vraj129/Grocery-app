@@ -51,6 +51,7 @@ public class CartActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_cart);
 
         firestore = FirebaseFirestore.getInstance();
@@ -68,7 +69,7 @@ public class CartActivity extends AppCompatActivity {
         cartAdapter = new CartAdapter(CartActivity.this,cartModelList);
         recyclerView.setAdapter(cartAdapter);
         firestore.collection("currentUser").document(auth.getCurrentUser().getUid())
-                .collection("AddToCart").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                .collection("Appointment").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful())
@@ -87,19 +88,24 @@ public class CartActivity extends AppCompatActivity {
                         cartAdapter.notifyDataSetChanged();
                         progressBar.setVisibility(View.GONE);
                         recyclerView.setVisibility(View.VISIBLE);
-
                     }
-
-                    calculateTotalAmount(cartModelList);
-                    amount = calculateTotalAmount(cartModelList);
-                    if(amount == 0)
-                    {
+                    if(cartModelList.size() == 0 ){
                         status = true;
                         progressBar.setVisibility(View.GONE);
                         constraintLayout.setVisibility(View.GONE);
                         linearLayout.setVisibility(View.VISIBLE);
-                        Toast.makeText(CartActivity.this, "Your Cart Is Empty", Toast.LENGTH_SHORT).show();
                     }
+
+                    //calculateTotalAmount(cartModelList);
+                    //amount = calculateTotalAmount(cartModelList);
+//                    if(amount == 0)
+//                    {
+//                        status = true;
+//                        progressBar.setVisibility(View.GONE);
+//                        constraintLayout.setVisibility(View.GONE);
+//                        linearLayout.setVisibility(View.VISIBLE);
+//                        Toast.makeText(CartActivity.this, "Your Cart Is Empty", Toast.LENGTH_SHORT).show();
+//                    }
                 }
             }
         });
@@ -107,16 +113,16 @@ public class CartActivity extends AppCompatActivity {
 
     }
 
-    private int calculateTotalAmount(List<CartModel> cartModelList) {
-
-        int totalAmount = 0;
-        for(CartModel model : cartModelList)
-        {
-            totalAmount += Integer.parseInt(model.getTotalPrice());
-        }
-        textView.setText("Total Amount : ₹"+String.valueOf(totalAmount));
-        return totalAmount;
-    }
+//    private int calculateTotalAmount(List<CartModel> cartModelList) {
+//
+//        int totalAmount = 0;
+//        for(CartModel model : cartModelList)
+//        {
+//            totalAmount += Integer.parseInt(model.getTotalPrice());
+//        }
+//        textView.setText("Total Amount : ₹"+String.valueOf(totalAmount));
+//        return totalAmount;
+//    }
 
 
 }

@@ -4,13 +4,84 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PeopleFragment">
+    <LinearLayout
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Profile View"
-        android:gravity="center"
-        android:textSize="20sp"/>
+        android:id="@+id/linear1"
+        android:layout_gravity="center"
+        android:gravity="center">
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+   <LinearLayout
+       android:id="@+id/linear2"
+       android:visibility="gone"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:layout_gravity="center"
+       android:orientation="vertical"
+       android:gravity="center">
+       <de.hdodenhof.circleimageview.CircleImageView
+           android:layout_width="150dp"
+           android:layout_height="150dp"
+           android:src="@drawable/man"/>
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_margin="15dp"
+           android:id="@+id/name"
+           android:text="Profile View"
+           android:gravity="center"
+           android:textStyle="italic|bold"
+           android:fontFamily="cursive"
+           android:textColor="@color/black"
+           android:textSize="30sp"/>
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:id="@+id/email"
+           android:text="gmail.com"
+           android:textColor="@color/black"
+           android:textSize="25sp"
+           android:fontFamily="cursive"/>
+       <Button
+           android:id="@+id/appointment"
+           android:layout_width="match_parent"
+           android:layout_height="40dp"
+           android:layout_marginLeft="25dp"
+           android:layout_marginRight="25dp"
+           android:layout_marginTop="20dp"
+           android:background="@drawable/search_bar"
+           android:text="Your Appointment"
+           android:drawableLeft="@drawable/ic_baseline_calendar_today_24"
+           android:textSize="15sp" />
+       <Button
+           android:id="@+id/favourite"
+           android:layout_width="match_parent"
+           android:layout_height="40dp"
+           android:layout_marginLeft="25dp"
+           android:layout_marginRight="25dp"
+           android:layout_marginTop="15dp"
+           android:background="@drawable/search_bar"
+           android:text="Favourite Store"
+           android:drawableLeft="@drawable/ic_baseline_favorite_24_1"
+           android:textSize="15sp" />
+       <Button
+           android:id="@+id/logout"
+           android:layout_width="match_parent"
+           android:layout_height="40dp"
+           android:layout_marginLeft="25dp"
+           android:layout_marginRight="25dp"
+           android:layout_marginTop="15dp"
+           android:background="@drawable/search_bar"
+           android:text="Log Out"
+           android:drawableLeft="@drawable/ic_baseline_login_24"
+           android:textSize="15sp" />
+   </LinearLayout>
+
 
 </FrameLayout>

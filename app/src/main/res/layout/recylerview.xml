@@ -9,12 +9,15 @@
     app:cardElevation="6dp">
 
     <LinearLayout
-        android:id="@+id/fruits_layout"
+        android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:orientation="vertical">
-
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:id="@+id/places"/>
         <ImageView
             android:id="@+id/fruit_image"
             android:layout_width="150dp"

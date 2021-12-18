@@ -49,18 +49,16 @@ public class CartAdapter  extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.name.setText(cartModelList.get(position).getProductName());
-        holder.price.setText(cartModelList.get(position).getproductPrice());
-        holder.date.setText(cartModelList.get(position).getCurrentDate());
-        holder.time.setText(cartModelList.get(position).getCurrentTime());
-        holder.quantity.setText(cartModelList.get(position).getTotalQuantity());
-        holder.totalprice.setText(cartModelList.get(position).getTotalPrice());
+        holder.name.setText(cartModelList.get(position).getStoreName());
+        holder.price.setText(cartModelList.get(position).getTotalPrice());
+        holder.date.setText(cartModelList.get(position).getAppointmentDate());
+        holder.time.setText(cartModelList.get(position).getLocation());
 
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 firestore.collection("currentUser").document(auth.getCurrentUser().getUid())
-                        .collection("AddToCart")
+                        .collection("Appointment")
                         .document(cartModelList.get(position).getDocumentId())
                         .delete()
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -91,7 +89,7 @@ public class CartAdapter  extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView name,price,date,time,quantity,totalprice;
+        TextView name,price,date,time;
         ImageView delete;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -99,8 +97,6 @@ public class CartAdapter  extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             price = itemView.findViewById(R.id.productprice);
             date = itemView.findViewById(R.id.currentdate);
             time = itemView.findViewById(R.id.currentime);
-            quantity = itemView.findViewById(R.id.totalQuantity);
-            totalprice = itemView.findViewById(R.id.totalprice);
             delete = itemView.findViewById(R.id.deleteitem);
         }
     }

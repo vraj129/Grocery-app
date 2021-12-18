@@ -1,24 +1,49 @@
 package com.example.grocery.Model;
 
 public class CartModel {
-    String productName;
-    String currentDate;
-    String currentTime;
-    String productPrice;
-    String totalPrice;
-    String totalQuantity;
-    String documentId;
+   String StoreName,TotalPrice,Location,AppointmentDate,documentId;
 
     public CartModel() {
     }
 
-    public CartModel(String productName, String currentDate, String currentTime, String productPrice, String totalPrice, String totalQuantity) {
-        this.productName = productName;
-        this.currentDate = currentDate;
-        this.currentTime = currentTime;
-        this.productPrice = productPrice;
-        this.totalPrice = totalPrice;
-        this.totalQuantity = totalQuantity;
+
+    public CartModel(String storeName, String totalPrice, String location, String appointmentDate) {
+        StoreName = storeName;
+        TotalPrice = totalPrice;
+        Location = location;
+        AppointmentDate = appointmentDate;
+    }
+
+    public String getStoreName() {
+        return StoreName;
+    }
+
+    public void setStoreName(String storeName) {
+        StoreName = storeName;
+    }
+
+    public String getTotalPrice() {
+        return TotalPrice;
+    }
+
+    public void setTotalPrice(String totalPrice) {
+        TotalPrice = totalPrice;
+    }
+
+    public String getLocation() {
+        return Location;
+    }
+
+    public void setLocation(String location) {
+        Location = location;
+    }
+
+    public String getAppointmentDate() {
+        return AppointmentDate;
+    }
+
+    public void setAppointmentDate(String appointmentDate) {
+        AppointmentDate = appointmentDate;
     }
 
     public String getDocumentId() {
@@ -27,53 +52,5 @@ public class CartModel {
 
     public void setDocumentId(String documentId) {
         this.documentId = documentId;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public String getCurrentDate() {
-        return currentDate;
-    }
-
-    public void setCurrentDate(String currentDate) {
-        this.currentDate = currentDate;
-    }
-
-    public String getCurrentTime() {
-        return currentTime;
-    }
-
-    public void setCurrentTime(String currentTime) {
-        this.currentTime = currentTime;
-    }
-
-    public String getproductPrice() {
-        return productPrice;
-    }
-
-    public void setproductPrice(String productPrice) {
-        this.productPrice = productPrice;
-    }
-
-    public String getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(String totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-    public String getTotalQuantity() {
-        return totalQuantity;
-    }
-
-    public void setTotalQuantity(String totalQuantity) {
-        this.totalQuantity = totalQuantity;
     }
 }

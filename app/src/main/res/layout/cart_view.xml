@@ -24,7 +24,7 @@
 
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
-               android:text="Product Name"
+               android:text="Store Name"
                android:layout_weight="1"
                android:textColor="@color/black"
                android:textSize="16sp" />
@@ -50,7 +50,7 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Product Price"
+                android:text="Total Bill (₹): "
                 android:layout_weight="1"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
@@ -75,7 +75,7 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Purchase Date"
+                android:text="Appointment Date : "
                 android:layout_weight="1"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
@@ -100,7 +100,7 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Purchase Time"
+                android:text="Store Location : "
                 android:layout_weight="1"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
@@ -112,56 +112,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Current Time"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:weightSum="2"
-            android:orientation="horizontal">
-            <TextView
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Total Quantity"
-                android:layout_weight="1"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-            <TextView
-                android:gravity="right"
-                android:textStyle="bold"
-                android:layout_weight="1"
-                android:id="@+id/totalQuantity"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Total Quantity"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:weightSum="2"
-            android:orientation="horizontal">
-            <TextView
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Total Price"
-                android:layout_weight="1"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-            <TextView
-                android:gravity="right"
-                android:textStyle="bold"
-                android:layout_weight="1"
-                android:id="@+id/totalprice"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Total price"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
         </LinearLayout>

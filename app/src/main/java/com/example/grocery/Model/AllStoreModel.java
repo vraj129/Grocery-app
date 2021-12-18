@@ -2,14 +2,15 @@ package com.example.grocery.Model;
 
 public class AllStoreModel {
 
-    String name,image;
+    String name,image,place;
 
     public AllStoreModel() {
     }
 
-    public AllStoreModel(String name, String image) {
+    public AllStoreModel(String name, String image, String place) {
         this.name = name;
         this.image = image;
+        this.place = place;
     }
 
     public String getName() {
@@ -26,5 +27,13 @@ public class AllStoreModel {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String places) {
+        this.place = places;
     }
 }

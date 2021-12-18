@@ -12,21 +12,22 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/search"
+            android:id="@+id/search1"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="25dp"
             android:background="@drawable/search_bar"
             android:drawableStart="@drawable/ic_baseline_search_24"
-            android:hint="Search Store"
+            android:hint="Search Saloon"
             android:backgroundTint="#EAE7E7"
             android:padding="16dp"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"/>
 
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
-            android:visibility="gone"
+            android:visibility="invisible"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

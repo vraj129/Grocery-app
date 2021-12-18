@@ -7,9 +7,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
@@ -23,6 +26,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 
 public class SearchFragment extends Fragment {
@@ -46,17 +50,34 @@ public class SearchFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_search, container, false);
+
         firestore = FirebaseFirestore.getInstance();
         storerecycler = root.findViewById(R.id.recycler);
-        searchBox = root.findViewById(R.id.search);
+        searchBox = root.findViewById(R.id.search1);
         progressBar = root.findViewById(R.id.progress_circular);
-
         modelList = new ArrayList<>();
         storerecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        storeAdapter = new StoreAdapter(getActivity(),modelList);
+        storeAdapter = new StoreAdapter(getActivity(),modelList,0);
 
         storerecycler.setAdapter(storeAdapter);
+        searchBox.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                progressBar.setVisibility(View.INVISIBLE);
+                filter(editable.toString());
+            }
+        });
+
 
         firestore.collection("AllStore")
                 .get()
@@ -64,6 +85,7 @@ public class SearchFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+
                             progressBar.setVisibility(View.INVISIBLE);
                             storerecycler.setVisibility(View.VISIBLE);
                             for (QueryDocumentSnapshot document : task.getResult()) {
@@ -71,6 +93,7 @@ public class SearchFragment extends Fragment {
                                 modelList.add(model);
                                 storeAdapter.notifyDataSetChanged();
                             }
+
                         } else {
 
                         }
@@ -78,5 +101,15 @@ public class SearchFragment extends Fragment {
                 });
 
         return root;
+    }
+
+    private void filter(String text) {
+        List<AllStoreModel> list = new ArrayList<>();
+        for(AllStoreModel model : modelList){
+            if(model.getName().toLowerCase().contains(text.toLowerCase())){
+                list.add(model);
+            }
+        }
+        storeAdapter.filterlist(list);
     }
 }

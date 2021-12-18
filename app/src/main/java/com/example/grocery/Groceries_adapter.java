@@ -29,13 +29,14 @@ public class Groceries_adapter extends RecyclerView.Adapter<Groceries_adapter.Gr
     public class Groceriesview extends RecyclerView.ViewHolder
     {
         ImageView imageView;
-        TextView grain_name;
+        TextView grain_name,place;
         LinearLayout linearLayout;
 
         public Groceriesview(@NonNull View itemView) {
             super(itemView);
             this.imageView = itemView.findViewById(R.id.grain_image);
             this.grain_name = itemView.findViewById(R.id.grain_name);
+            this.place = itemView.findViewById(R.id.places);
             this.linearLayout = itemView.findViewById(R.id.background_color);
         }
     }
@@ -53,16 +54,16 @@ public class Groceries_adapter extends RecyclerView.Adapter<Groceries_adapter.Gr
     public void onBindViewHolder(@NonNull  Groceries_adapter.Groceriesview holder, int position) {
         Groceries_model groceries_model = groceries_models.get(position);
         holder.grain_name.setText(groceries_model.getGrain_title());
+        holder.place.setText(groceries_model.getPlace());
         Glide.with(mContext).load(groceries_models.get(position).getImage()).into(holder.imageView);
-        //holder.linearLayout.setBackground(groceries_model.getColor());
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                int imageid = groceries_model.getImage();
-//                Intent i = new Intent(mContext,GrainDetails.class);
-//                i.putExtra("name",groceries_model.getGrain_title());
-//                i.putExtra("image",String.valueOf(imageid));
-//                mContext.startActivity(i);
+                Intent i = new Intent(mContext,GrainDetails.class);
+                i.putExtra("name",groceries_model.getGrain_title());
+                i.putExtra("image",groceries_model.getImage());
+                i.putExtra("place",groceries_model.getPlace());
+                mContext.startActivity(i);
             }
         });
     }
