@@ -46,20 +46,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="left"
-                android:text="hello"
+                android:text="Louise Hair Saloon"
                 android:textColor="@color/black"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:textStyle="bold" />
 
             <Button
-                android:layout_width="wrap_content"
                 android:id="@+id/fav"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:drawableLeft="@drawable/ic_baseline_favorite_24_1"
                 android:background="@drawable/search_bar"
-                android:textSize="12sp"
-                android:text="Favourite" />
+                android:drawableLeft="@drawable/ic_baseline_favorite_24_1"
+                android:text="Fav"
+                android:textSize="12sp" />
 
         </RelativeLayout>
     </LinearLayout>

@@ -3,6 +3,7 @@ package com.example.grocery.Adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +16,16 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.grocery.CartActivity;
+import com.example.grocery.GrainDetails;
+import com.example.grocery.Mail.JavaMailApi;
 import com.example.grocery.Model.CartModel;
 import com.example.grocery.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
@@ -30,14 +36,18 @@ public class CartAdapter  extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     List<CartModel> cartModelList;
     FirebaseFirestore firestore;
     FirebaseAuth auth;
+    String email11;
 
     int total_price = 0;
 
-    public CartAdapter(Context mContext, List<CartModel> cartModelList) {
+    public CartAdapter(Context mContext, List<CartModel> cartModelList,String email11) {
         this.mContext = mContext;
         this.cartModelList = cartModelList;
         firestore = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
+        this.email11 = email11;
+
+
     }
 
     @NonNull
@@ -57,6 +67,8 @@ public class CartAdapter  extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
                 firestore.collection("currentUser").document(auth.getCurrentUser().getUid())
                         .collection("Appointment")
                         .document(cartModelList.get(position).getDocumentId())

@@ -24,9 +24,13 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.grocery.Mail.JavaMailApi;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -48,6 +52,7 @@ public class GrainDetails extends AppCompatActivity {
     Button addtocart,SelectDate,Favourite;
     FirebaseFirestore firestore;
     FirebaseAuth auth;
+    DatabaseReference databaseReference;
     Spinner Splace;
     String place_selected;
     String id;
@@ -57,6 +62,10 @@ public class GrainDetails extends AppCompatActivity {
     Boolean fav_clicked = false;
     CheckBox haircut,facial,hairwash;
     LinearLayout ll1;
+
+    //--------
+    String email11;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +90,7 @@ public class GrainDetails extends AppCompatActivity {
         places = getIntent().getStringExtra("place");
         String[] placearr =  places.split(","); //Places
         place_selected = placearr[0];
+        getUserData();
        // Toast.makeText(GrainDetails.this,"Selected : "+place_selected,Toast.LENGTH_SHORT).show();
 //        for (int i =0; i<placearr.length;i++)
 //            Log.d("Grain Details","Data : "+placearr[i]);
@@ -183,7 +193,7 @@ public class GrainDetails extends AppCompatActivity {
         addtocart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(totalprice == 0 || selectedTime == 0){
+                if(totalprice == 0 || selectedTime == 0 || email11.isEmpty()){
                     Toast.makeText(GrainDetails.this,"Please Fill All Your Details",Toast.LENGTH_LONG).show();
                 }
                 else {
@@ -231,7 +241,26 @@ public class GrainDetails extends AppCompatActivity {
             }
         });
 
+
+
      }
+    private void getUserData() {
+        databaseReference = FirebaseDatabase.getInstance().getReference("Users");
+        databaseReference.child(auth.getCurrentUser().getUid()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if(task.isSuccessful()){
+                    DataSnapshot snapshot = task.getResult();
+                    email11 = String.valueOf(snapshot.child("email").getValue());
+                    Log.d("Grain","Email : "+email11);
+                }
+                else {
+                    Log.d("Grain","Error Fetching Data");
+                }
+            }
+        });
+
+    }
 
     private void removeFavourite() {
         docid = auth.getCurrentUser().getUid()+name;
@@ -272,6 +301,11 @@ public class GrainDetails extends AppCompatActivity {
         cartMap.put("AppointmentDate",date.getText().toString());
         cartMap.put("Location",place_selected);
 
+        String subject = "Saloon Appointment";
+        String Emailmsg = "Your Appointment For "+textView.getText().toString()+" is on "+date.getText().toString()+"\n at "+place_selected+" and your\n Total Bill is : ₹"+String.valueOf(totalprice);
+        JavaMailApi javaMailAPI = new JavaMailApi(GrainDetails.this,email11,subject,Emailmsg);
+
+        javaMailAPI.execute();
         firestore.collection("currentUser").document(auth.getCurrentUser().getUid())
                 .collection("Appointment").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
             @Override

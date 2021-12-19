@@ -20,15 +20,19 @@ import androidx.fragment.app.Fragment;
 import com.example.grocery.MainActivity;
 import com.example.grocery.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginTabFragment extends Fragment {
 
     EditText email,password;
     Button logbtn;
     FirebaseAuth auth;
+    FirebaseUser fuser;
     ProgressBar progressBar;
 
 
@@ -37,14 +41,17 @@ public class LoginTabFragment extends Fragment {
         BindView(root);
         progressBar.setVisibility(View.GONE);
         auth = FirebaseAuth.getInstance();
+        fuser = auth.getCurrentUser();
         if(auth.getCurrentUser() != null)
         {
-            progressBar.setVisibility(View.VISIBLE);
-            //Toast.makeText(getActivity(),"Please wait you are Already Logged In",Toast.LENGTH_SHORT).show();
-            progressBar.setVisibility(View.GONE);
-            Intent i = new Intent(getActivity(), MainActivity.class);
-            startActivity(i);
-            getActivity().finish();
+
+            if(fuser.isEmailVerified()){
+                Intent i = new Intent(getActivity(), MainActivity.class);
+                startActivity(i);
+                getActivity().finish();
+            }
+
+
 
         }
         logbtn.setOnClickListener(new View.OnClickListener() {
@@ -58,6 +65,7 @@ public class LoginTabFragment extends Fragment {
     }
 
     private void loginUser() {
+        fuser = auth.getCurrentUser();
         progressBar.setVisibility(View.VISIBLE);
         String user_email = email.getText().toString();
         String user_pass = password.getText().toString();
@@ -99,14 +107,20 @@ public class LoginTabFragment extends Fragment {
                             progressBar.setVisibility(View.GONE);
                             email.setText("");
                             password.setText("");
-                            Toast.makeText(getActivity(), "Login Successful", Toast.LENGTH_SHORT).show();
-                            Intent i = new Intent(getActivity(), MainActivity.class);
-                            startActivity(i);
-                            getActivity().finish();
+                            fuser = auth.getCurrentUser();
+                            if(fuser.isEmailVerified()){
+                                Toast.makeText(getActivity(), "Login Successful", Toast.LENGTH_SHORT).show();
+                                Intent i = new Intent(getActivity(), MainActivity.class);
+                                startActivity(i);
+                                getActivity().finish();
+                            }
+                            else{
+                                Toast.makeText(getActivity(), "Please Verify Your Email Id", Toast.LENGTH_LONG).show();
+                            }
                         }
                         else
                         {
-                            Toast.makeText(getActivity(), "Login Unsuccessful"+task.getException(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Login Unsuccessful"+task.getException(), Toast.LENGTH_LONG).show();
                             progressBar.setVisibility(View.GONE);
                         }
                     }

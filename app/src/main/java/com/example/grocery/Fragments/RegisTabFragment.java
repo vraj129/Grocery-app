@@ -17,9 +17,12 @@ import androidx.fragment.app.Fragment;
 import com.example.grocery.Model.UserModel;
 import com.example.grocery.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
 
@@ -101,6 +104,18 @@ public class RegisTabFragment extends Fragment {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful())
                         {
+                            FirebaseUser fuser = auth.getCurrentUser();
+                            fuser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(getActivity(), "Verification Email Link Sent", Toast.LENGTH_SHORT).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+
+                                }
+                            });
                             UserModel user = new UserModel(user_name,user_email,user_pass);
                             String id = task.getResult().getUser().getUid();
                             database.getReference().child("Users").child(id).setValue(user);
@@ -108,7 +123,7 @@ public class RegisTabFragment extends Fragment {
                             name.setText("");
                             email.setText("");
                             password.setText("");
-                            Toast.makeText(getActivity(), "Registration Complete", Toast.LENGTH_SHORT).show();
+
                         }
                         else
                         {

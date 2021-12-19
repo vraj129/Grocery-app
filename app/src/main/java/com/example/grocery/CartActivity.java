@@ -25,6 +25,9 @@ import com.example.grocery.Model.CartModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -45,6 +48,9 @@ public class CartActivity extends AppCompatActivity {
     LinearLayout linearLayout;
     ConstraintLayout constraintLayout;
     ProgressBar progressBar;
+
+    DatabaseReference databaseReference;
+    String email11;
     int amount=0;
     Button buyButton;
     private static final String TAG = "Cart Activity";
@@ -56,6 +62,7 @@ public class CartActivity extends AppCompatActivity {
 
         firestore = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
+        getUserData();
         recyclerView = findViewById(R.id.cartrecycler);
         textView = findViewById(R.id.textView);
         linearLayout = findViewById(R.id.linearlayout);
@@ -66,7 +73,7 @@ public class CartActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(CartActivity.this));
 
         cartModelList = new ArrayList<>();
-        cartAdapter = new CartAdapter(CartActivity.this,cartModelList);
+        cartAdapter = new CartAdapter(CartActivity.this,cartModelList,email11);
         recyclerView.setAdapter(cartAdapter);
         firestore.collection("currentUser").document(auth.getCurrentUser().getUid())
                 .collection("Appointment").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -110,6 +117,23 @@ public class CartActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+    private void getUserData() {
+        databaseReference = FirebaseDatabase.getInstance().getReference("Users");
+        databaseReference.child(auth.getCurrentUser().getUid()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if(task.isSuccessful()){
+                    DataSnapshot snapshot = task.getResult();
+                    email11 = String.valueOf(snapshot.child("email").getValue());
+                    Log.d("CartActivity","Email : "+email11);
+                }
+                else {
+                    Log.d("CartActivity","Error Fetching Data");
+                }
+            }
+        });
 
     }
 
